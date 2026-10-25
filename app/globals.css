@@ -1,0 +1,313 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/*
+  globals.css — Neo-brutalist design tokens for Contribution Finder.
+  All colors, fonts, shadows and radii are defined here using Tailwind v4
+  CSS-first config. shadcn components inherit these tokens automatically.
+  No tailwind.config.ts is needed in v4.
+*/
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* ── Fonts ── */
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-heading:
+    var(--font-archivo-black), var(--font-archivo), ui-sans-serif, system-ui,
+    sans-serif;
+
+  /* ── Colors (mapped from CSS vars below) ── */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-shadow-color: var(--shadow-color);
+  --color-mint: var(--mint);
+
+  /* ── Shadows (neo-brutalist hard offset) ── */
+  --shadow-brut: 5px 5px 0 var(--shadow-color);
+  --shadow-brut-lg: 8px 8px 0 var(--shadow-color);
+
+  /* ── Radii: 0 everywhere (neo-brutalist) ── */
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-4xl: 0px;
+}
+
+/* ── Light theme (default) ── */
+:root {
+  --radius: 0px;
+
+  /* Sun background */
+  --background: #ffd93d;
+  --foreground: #111111;
+
+  /* Paper cards */
+  --card: #ffffff;
+  --card-foreground: #111111;
+  --popover: #ffffff;
+  --popover-foreground: #111111;
+
+  /* Tomato primary — ink text (not white, for contrast) */
+  --primary: #ff5a36;
+  --primary-foreground: #111111;
+
+  /* Secondary */
+  --secondary: #ffffff;
+  --secondary-foreground: #111111;
+
+  /* Muted */
+  --muted: #f5f5f5;
+  --muted-foreground: #3d3d3d;
+
+  /* Mint accent */
+  --accent: #7be0b4;
+  --accent-foreground: #111111;
+  --mint: #7be0b4;
+
+  /* Destructive (darker red) */
+  --destructive: #d32f2f;
+  --destructive-foreground: #ffffff;
+
+  /* Borders / input / ring — Ink */
+  --border: #111111;
+  --input: #111111;
+  --ring: #111111;
+  --shadow-color: #111111;
+}
+
+/* ── Dark theme ── */
+.dark {
+  --background: #141414;
+  --foreground: #ffffff;
+
+  --card: #1f1f1f;
+  --card-foreground: #ffffff;
+  --popover: #1f1f1f;
+  --popover-foreground: #ffffff;
+
+  /* Tomato stays the same — ink text for contrast */
+  --primary: #ff5a36;
+  --primary-foreground: #111111;
+
+  --secondary: #1f1f1f;
+  --secondary-foreground: #ffffff;
+
+  --muted: #2a2a2a;
+  --muted-foreground: #c9c9c9;
+
+  /* Mint accent — same in dark */
+  --accent: #7be0b4;
+  --accent-foreground: #111111;
+  --mint: #7be0b4;
+
+  --destructive: #ff6b6b;
+  --destructive-foreground: #111111;
+
+  /* Sun borders in dark */
+  --border: #ffd93d;
+  --input: #ffd93d;
+  --ring: #ffd93d;
+  --shadow-color: #ffd93d;
+}
+
+/* ── Base layer ── */
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  html {
+    @apply font-sans;
+    scroll-behavior: smooth;
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* ── Focus visible — thick outline on everything ── */
+  :focus-visible {
+    outline: 4px solid var(--foreground);
+    outline-offset: 2px;
+  }
+
+  /* ── Headings use Archivo Black ── */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    line-height: 1.2;
+  }
+
+  /* ── Keep line length readable ── */
+  p,
+  li,
+  blockquote {
+    max-width: 80ch;
+  }
+
+  /* ── Scroll margin so sticky header doesn't cover anchored content ── */
+  [id] {
+    scroll-margin-top: 5rem;
+  }
+}
+
+/* ── Neo-brutalist interactive states ── */
+@layer components {
+  /* Buttons and chips: translate on hover, press on active */
+  .brut-interactive {
+    transition:
+      transform 0.1s ease,
+      box-shadow 0.1s ease;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .brut-interactive:hover {
+      transform: translate(-2px, -2px);
+    }
+    .brut-interactive:active {
+      transform: translate(5px, 5px);
+      box-shadow: none !important;
+    }
+  }
+
+  /* Large brut interactive (cards) */
+  .brut-interactive-lg {
+    transition:
+      transform 0.1s ease,
+      box-shadow 0.1s ease;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .brut-interactive-lg:hover {
+      transform: translate(-2px, -2px);
+    }
+    .brut-interactive-lg:active {
+      transform: translate(8px, 8px);
+      box-shadow: none !important;
+    }
+  }
+}
+
+/* ── Skip to content link ── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 100;
+  padding: 12px 24px;
+  background: var(--foreground);
+  color: var(--background);
+  font-weight: 600;
+  border: 3px solid var(--border);
+  text-decoration: none;
+}
+.skip-link:focus {
+  top: 16px;
+}
+
+/* ── Scroll progress bar ── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--primary);
+  transform-origin: left;
+  z-index: 9999;
+}
+
+/* ── Print stylesheet ── */
+@media print {
+  /* Hide non-essential UI */
+  header,
+  footer,
+  nav,
+  .cookie-banner,
+  .scroll-to-top,
+  .contact-button,
+  .scroll-progress,
+  .theme-toggle,
+  .search-button,
+  .mobile-menu-trigger,
+  [role="dialog"],
+  [data-sonner-toaster] {
+    display: none !important;
+  }
+
+  /* White background, black text, no shadows */
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 12pt;
+  }
+
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* Remove card borders and shadows for cleaner print */
+  .print\:no-border {
+    border: none !important;
+  }
+
+  /* Show URLs after external links in main content */
+  main a[href^="http"]::after,
+  main a[href^="https"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+    word-break: break-all;
+  }
+
+  /* Avoid breaking inside cards */
+  .print\:break-inside-avoid,
+  [data-slot="card"] {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
