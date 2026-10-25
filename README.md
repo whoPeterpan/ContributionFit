@@ -6,7 +6,7 @@ ContriFit (short for **ContributionFit**) is an AI-assisted open-source contribu
 
 > **Project status:** In development. This README describes the intended product and architecture. Treat a capability as implemented only when it is present in the repository and verified in `PROJECT_STATUS.md` or by the relevant tests. The initial ranking system is heuristic and has not been validated against contribution outcomes.
 
-**Design reference:** [ContriFit — Figma Make](https://cane-syrup-26599187.figma.site/)
+**Design reference:** [ContriFit](https://cane-syrup-26599187.figma.site/)
 
 ---
 
