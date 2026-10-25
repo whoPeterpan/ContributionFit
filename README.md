@@ -30,6 +30,9 @@ ContriFit (short for **ContributionFit**) is an AI-assisted open-source contribu
 - [Roadmap](#roadmap)
 - [Documentation and references](#documentation-and-references)
 
+## Presentation & Overview
+You can view the project slide deck and architecture presentation here: [ContriFit Presentation Slides](https://docs.google.com/presentation/d/1Y4R4JG0_ftP1Btrc1Ql4aZ9NoqOUd9lR/edit?usp=sharing&ouid=117913180197404406162&rtpof=true&sd=true).
+
 ## Why ContriFit?
 
 Finding an issue is only the first step in contributing to open source. Developers also need to judge whether the task matches their skills, whether the issue has enough context to begin, what they may need to learn, and what to investigate before changing code.
